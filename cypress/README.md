@@ -6,7 +6,7 @@ Le produit utilisé par les tests du panier (`cypress/fixtures/products.json`) a
 
 Avant chaque nouvelle session de tests, repartez d'une base propre :
 
-```
+```bash
 docker compose down -v
 docker compose up -d
 ```
@@ -18,18 +18,18 @@ Le test `Panier` échoue volontairement et tôt, avec un message explicite, si l
 ## Pré-requis et Installation
 
 Depuis le dossier `frontend` :
-```
+```bash
 npm install
 ```
 
 1. Démarrer l'API et sa base de données (depuis la racine du projet) :
-   ```
-   docker compose up -d
-   ```
+```bash
+docker compose up -d
+```
 2. Démarrer le frontend :
-   ```
-   npm start
-   ```
+```bash
+npm start
+```
    (le site doit être accessible sur http://localhost:4200)
 
 ---
@@ -37,17 +37,17 @@ npm install
 ## Lancer les tests
 
 - Mode interactif (recommandé en développement) :
-  ```
-  npm run cypress open
-  ```
+```bash
+npm run cypress:open
+```
 - Mode headless (CI) :
-  ```
-  npm run cypress run
-  ```
+```bash
+npm run cypress:run
+```
 - Démarrage automatique du serveur + tests (CI) :
-  ```
-  npm run e2e
-  ```
+```bash
+npm run e2e
+```
 
 ---
 
@@ -55,10 +55,10 @@ npm install
 
 Les tests sont découpés pour couvrir de manière exhaustive les couches fonctionnelles, API et sécurité de l'application :
 
-*   `api.cy.js` : Validation des contrats d'interface (endpoints Swagger) pour l'authentification, les commandes, les produits et les avis.
-*   `connexion.cy.js` : Parcours E2E critique validant l'interface de connexion utilisateur.
-*   `panier.cy.js` : Parcours E2E critique validant l'ajout au panier, la vérification des limites de quantité et la décrémentation du stock en direct.
-*   `xss.cy.js` : Contrôle de sécurité s'assurant que les espaces de saisie (comme les commentaires/avis) neutralisent correctement les injections de scripts malveillants.
+*   **`api.cy.js` :** Validation des contrats d'interface (endpoints Swagger) pour l'authentification, les commandes, les produits et les avis.
+*   **`connexion.cy.js` :** Parcours E2E critique validant l'interface de connexion utilisateur.
+*   **`panier.cy.js` :** Parcours E2E critique validant l'ajout au panier, la vérification des limites de quantité et la décrémentation du stock en direct.
+*   **`xss.cy.js` :** Contrôle de sécurité s'assurant que les espaces de saisie (comme les commentaires/avis) neutralisent correctement les injections de scripts malveillants.
 
 Les données de test (utilisateur, produit, avis) sont centralisées dans `cypress/fixtures` pour éviter de dupliquer les mêmes objets dans plusieurs fichiers de test. Les commandes custom se trouvent dans `cypress/support/commands.js`.
 
@@ -66,10 +66,10 @@ Les données de test (utilisateur, produit, avis) sont centralisées dans `cypre
 
 ## Choix techniques
 
-- Sélecteurs résilients (`data-cy`) : tous les tests s'appuient sur les attributs `data-cy` déjà présents dans le HTML, plutôt que sur des classes CSS ou du texte, pour ne pas casser les tests si le design change.
-- Maîtrise de l'asynchronisme (`cy.intercept`) : utilisés à la place de temporisations fixes (`cy.wait(1000)`) pour attendre la fin réelle des appels réseau.
-- Optimisation de session (`cy.session()`) : la connexion est mise en cache entre les tests qui n'ont besoin que d'être connectés (panier, smoke tests), afin d'accélérer l'exécution. Un test dédié (`connexion.cy.js`) vérifie tout de même le parcours de connexion complet via l'interface.
-- Détection proactive d'alertes (XSS) : Utilisation d'écouteurs d'événements natifs (`cy.on('window:alert')`) pour intercepter et faire échouer les tests de sécurité si une faille d'injection est exploitée.
+- **Sélecteurs résilients (`data-cy`)** : tous les tests s'appuient sur les attributs `data-cy` déjà présents dans le HTML, plutôt que sur des classes CSS ou du texte, pour ne pas casser les tests si le design change.
+- **Maîtrise de l'asynchronisme (`cy.intercept`)** : utilisés à la place de temporisations fixes (`cy.wait(1000)`) pour attendre la fin réelle des appels réseau.
+- **Optimisation de session (`cy.session()`)** : la connexion est mise en cache entre les tests qui n'ont besoin que d'être connectés (panier, smoke tests), afin d'accélérer l'exécution. Un test dédié (`connexion.cy.js`) vérifie tout de même le parcours de connexion complet via l'interface.
+- **Détection proactive d'alertes (XSS)** : Utilisation d'écouteurs d'événements natifs (`cy.on('window:alert')`) pour intercepter et faire échouer les tests de sécurité si une faille d'injection est exploitée.
 
 ---
 
