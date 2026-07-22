@@ -75,11 +75,11 @@ Les données de test (utilisateur, produit, avis) sont centralisées dans `cypre
 
 ## Bilan des Anomalies et Écarts
 
-** Anomalies connues (voir bilan de Marie) **
+**Anomalies connues (voir bilan de Marie)**
 - `GET /orders` sans authentification retourne 401 au lieu du 403 attendu.
 - `POST /orders/add` est en réalité exposé en `PUT` côté frontend.
 
-** Anomalies détectées par la suite Cypress **
+**Anomalies détectées par la suite Cypress**
 - Front-end : Absence de validation de quantité. Le champ <input> de quantité sur la fiche produit manque d'attributs de validation (min="1", max="20"). Saisir une valeur excessive (25) ne déclenche aucune erreur côté UI (la classe Angular ng-invalid ne s'applique pas). Les tests liés aux limites de quantités dans `panier.cy.js` échouent pour matérialiser ce bug.
 - Back-end : Ajout de produits en rupture.`PUT /orders/add` retourne `200 OK` et ajoute au panier un produit dont le `availableStock` est à 0 (aucune vérification du stock côté API). Le test lié au produit en rupture de stock (`api.cy.js`) est laissé volontairement en échec pour matérialiser cette anomalie tant qu'elle n'est pas corrigée — c'est une régression détectée par les tests, pas un bug de script.
 - Back-end : Absence de limite de quantité. Aucune limite de quantité (ex. max 20) ne semble appliquée côté API sur `PUT /orders/add` (voir les tests de limites dans `panier.cy.js`).
