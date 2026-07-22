@@ -38,15 +38,11 @@ npm start
 
 - Mode interactif (recommandé en développement) :
 ```bash
-npm run cypress:open
+npx cypress open
 ```
 - Mode headless (CI) :
 ```bash
-npm run cypress:run
-```
-- Démarrage automatique du serveur + tests (CI) :
-```bash
-npm run e2e
+npx cypress run
 ```
 
 ---
