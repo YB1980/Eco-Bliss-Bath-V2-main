@@ -83,6 +83,8 @@ Les données de test (utilisateur, produit, avis) sont centralisées dans `cypre
 
 Ces points sont documentés dans les tests concernés et devront être corrigés côté backend/frontend puis les assertions mises à jour en conséquence.
 
+---
+
 ## ⚠️ Point de vigilance qualité
 
 La découverte d'un affichage de stocks négatifs sur l'interface front-end met en évidence un défaut d'ergonomie qui nécessite une correction rapide pour préserver l'image de marque de la plateforme _Eco Bliss Bath_.
