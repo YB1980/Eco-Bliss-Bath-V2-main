@@ -51,6 +51,7 @@ npx cypress run
 
 Les tests sont découpés pour couvrir de manière exhaustive les couches fonctionnelles, API et sécurité de l'application :
 
+*   **`smoke.cy.js` :** Validation rapide des composants essentiels (présence des champs de connexion et du bouton d'ajout au panier après authentification).
 *   **`api.cy.js` :** Validation des contrats d'interface (endpoints Swagger) pour l'authentification, les commandes, les produits et les avis.
 *   **`connexion.cy.js` :** Parcours E2E critique validant l'interface de connexion utilisateur.
 *   **`panier.cy.js` :** Parcours E2E critique validant l'ajout au panier, la vérification des limites de quantité et la décrémentation du stock en direct.
