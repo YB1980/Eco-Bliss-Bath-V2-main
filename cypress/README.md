@@ -63,10 +63,10 @@ Les données de test (utilisateur, produit, avis) sont centralisées dans `cypre
 
 ## Choix techniques
 
-- **Sélecteurs résilients (`data-cy`)** : tous les tests s'appuient sur les attributs `data-cy` déjà présents dans le HTML, plutôt que sur des classes CSS ou du texte, pour ne pas casser les tests si le design change.
-- **Maîtrise de l'asynchronisme (`cy.intercept`)** : utilisés à la place de temporisations fixes (`cy.wait(1000)`) pour attendre la fin réelle des appels réseau.
-- **Optimisation de session (`cy.session()`)** : la connexion est mise en cache entre les tests qui n'ont besoin que d'être connectés (panier, smoke tests), afin d'accélérer l'exécution. Un test dédié (`connexion.cy.js`) vérifie tout de même le parcours de connexion complet via l'interface.
-- **Détection proactive d'alertes (XSS)** : Utilisation d'écouteurs d'événements natifs (`cy.on('window:alert')`) pour intercepter et faire échouer les tests de sécurité si une faille d'injection est exploitée.
+- **Sélecteurs résilients (`data-cy`) :** tous les tests s'appuient sur les attributs `data-cy` déjà présents dans le HTML, plutôt que sur des classes CSS ou du texte, pour ne pas casser les tests si le design change.
+- **Maîtrise de l'asynchronisme (`cy.intercept`) :** utilisés à la place de temporisations fixes (`cy.wait(1000)`) pour attendre la fin réelle des appels réseau.
+- **Optimisation de session (`cy.session()`) :** la connexion est mise en cache entre les tests qui n'ont besoin que d'être connectés (panier, smoke tests), afin d'accélérer l'exécution. Un test dédié (`connexion.cy.js`) vérifie tout de même le parcours de connexion complet via l'interface.
+- **Détection proactive d'alertes (XSS) :** Utilisation d'écouteurs d'événements natifs (`cy.on('window:alert')`) pour intercepter et faire échouer les tests de sécurité si une faille d'injection est exploitée.
 
 ---
 
